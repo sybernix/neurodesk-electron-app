@@ -13,7 +13,7 @@ function createWindow () {
       contextIsolation: false,
       enableRemoteModule: true,
     }
-  })
+  });
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
