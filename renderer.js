@@ -6,11 +6,21 @@
 // process.
 const exec = require('child_process').exec
 
+function runVnmFirst() {
+    exec('sudo docker run --privileged --name vnm -v ~/vnm:/vnm -v /dev/shm:/dev/shm -e USER=neuro -p 6080:80 vnmd/vnm:20210523', (err, stdout, stderr) => {
+        console.log(stdout)
+    });
+}
+
 function startVnm() {
     exec('sudo docker start vnm', (err, stdout, stderr) => {
         console.log(stdout)
     });
 }
+
+document.querySelector('#runVnmFirst').addEventListener('click', () => {
+    runVnmFirst()
+})
 
 document.querySelector('#startVnm').addEventListener('click', () => {
     startVnm()
