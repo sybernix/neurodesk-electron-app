@@ -27,6 +27,14 @@ function openVnm() {
     shell.openExternal('http://localhost:6080');
 }
 
+function stopVnm() {
+    exec('sudo docker stop vnm', (err, stdout, stderr) => {
+        console.log(err);
+        console.log(stdout);
+        console.log(stderr)
+    });
+}
+
 document.querySelector('#runVnmFirst').addEventListener('click', () => {
     runVnmFirst()
 })
@@ -37,4 +45,8 @@ document.querySelector('#startVnm').addEventListener('click', () => {
 
 document.querySelector('#openVnm').addEventListener('click', () => {
     openVnm()
+})
+
+document.querySelector('#stopVnm').addEventListener('click', () => {
+    stopVnm()
 })
