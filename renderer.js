@@ -6,17 +6,12 @@
 // process.
 const exec = require('child_process').exec
 
-function getData() {
-    console.log("button clicked");
-    exec('ls -la', (err, stdout, stderr) => {
-        console.log(stdout)
-    });
-
+function startVnm() {
     exec('sudo docker start vnm', (err, stdout, stderr) => {
         console.log(stdout)
     });
 }
 
-document.querySelector('#btnEd').addEventListener('click', () => {
-    getData()
+document.querySelector('#startVnm').addEventListener('click', () => {
+    startVnm()
 })
