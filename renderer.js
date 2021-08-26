@@ -7,6 +7,13 @@
 const exec = require('child_process').exec
 const shell = require('electron').shell;
 const { dialog } = require('electron').remote;
+const os = require('os');
+
+const platforms = {
+    WINDOWS: 'WINDOWS',
+    MAC: 'MAC',
+    LINUX: 'LINUX',
+};
 
 function runVnmFirst() {
     exec('sudo docker run --privileged --name vnm -v ~/vnm:/vnm -v /dev/shm:/dev/shm -e USER=neuro -p 6080:80 vnmd/vnm:20210523', (err, stdout, stderr) => {
@@ -57,6 +64,10 @@ function checkDocker() {
     });
 }
 
+function checkPlatform() {
+    console.log(os.platform());
+}
+
 document.querySelector('#runVnmFirst').addEventListener('click', () => {
     runVnmFirst()
 })
@@ -75,4 +86,8 @@ document.querySelector('#stopVnm').addEventListener('click', () => {
 
 document.querySelector('#checkDocker').addEventListener('click', () => {
     checkDocker()
+})
+
+document.querySelector('#checkPlatform').addEventListener('click', () => {
+    checkPlatform()
 })
