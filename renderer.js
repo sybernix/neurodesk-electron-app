@@ -9,18 +9,28 @@ const shell = require('electron').shell;
 const { dialog } = require('electron').remote;
 const os = require('os');
 
-const platforms = {
-    WINDOWS: 'WINDOWS',
-    MAC: 'MAC',
-    LINUX: 'LINUX',
-};
+const platform = os.platform();
 
 function runVnmFirst() {
-    exec('sudo docker run --privileged --name vnm -v ~/vnm:/vnm -v /dev/shm:/dev/shm -e USER=neuro -p 6080:80 vnmd/vnm:20210523', (err, stdout, stderr) => {
-        console.log(err);
-        console.log(stdout);
-        console.log(stderr);
-    });
+    if (platform === 'linux') {
+        exec('sudo docker run --privileged --name vnm -v ~/vnm:/vnm -v /dev/shm:/dev/shm -e USER=neuro -p 6080:80 vnmd/vnm:20210523', (err, stdout, stderr) => {
+            console.log(err);
+            console.log(stdout);
+            console.log(stderr);
+        });
+    } else if (platform === 'darwin') {
+        exec('docker run --privileged --name vnm -v ~/vnm:/vnm -e USER=neuro -p 6080:80 vnmd/vnm:20210523', (err, stdout, stderr) => {
+            console.log(err);
+            console.log(stdout);
+            console.log(stderr);
+        });
+    } else if (platform === 'win32') {
+        exec('docker run --privileged --name vnm -v C:/vnm:/vnm -e USER=neuro -p 6080:80 vnmd/vnm:20210523', (err, stdout, stderr) => {
+            console.log(err);
+            console.log(stdout);
+            console.log(stderr);
+        });
+    }
 }
 
 function startVnm() {
@@ -65,7 +75,7 @@ function checkDocker() {
 }
 
 function checkPlatform() {
-    console.log(os.platform());
+    console.log(platform);
 }
 
 document.querySelector('#runVnmFirst').addEventListener('click', () => {
