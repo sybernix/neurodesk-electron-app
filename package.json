@@ -1,6 +1,6 @@
 {
   "name": "neurodesk-electron-app",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "A minimal Electron application to use Neuro Desk",
   "main": "main.js",
   "scripts": {
