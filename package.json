@@ -1,7 +1,7 @@
 {
-  "name": "electron-quick-start",
+  "name": "neurodesk-electron-app",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A minimal Electron application to use Neuro Desk",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
@@ -16,10 +16,30 @@
   ],
   "author": "GitHub",
   "license": "CC0-1.0",
+  "scripts:": {
+    "postinstall": "electron-builder install-app-deps",
+    "build": "electron-builder --mac --windows --linux",
+    "release": "electron-builder --mac --windows --linux --publish always"
+  },
+  "build": {
+    "appId": "com.yourcompany.yourapp",
+    "productName": "Neurodesk Electron App",
+    "mac": {
+      "category": "public.app-category.lifestyle"
+    },
+    "dmg": {
+      "icon": false
+    },
+    "linux": {
+      "target": ["AppImage"],
+      "category": "Office"
+    }
+  },
   "devDependencies": {
     "electron": "^13.2.1"
   },
   "dependencies": {
+    "electron-builder": "^22.11.7",
     "react": "^17.0.2"
   }
 }
