@@ -20,6 +20,20 @@ function removeDocker() {
     });
 }
 
+function installDocker() {
+    let installDockerCommand1 = 'sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release';
+    let installDockerCommand2 = 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg';
+    exec(installDockerCommand1, (err, stdout, stderr) => {
+        console.log(err);
+        console.log(stdout);
+        console.log(stderr);
+    });
+}
+
 document.querySelector('#removeDocker').addEventListener('click', () => {
     removeDocker()
+})
+
+document.querySelector('#installDocker').addEventListener('click', () => {
+    installDocker()
 })
