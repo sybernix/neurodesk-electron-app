@@ -66,12 +66,16 @@ function stopVnm() {
 
 function checkDocker() {
     let checkDockerCommand;
+    let errorMessage;
     if (platform === 'linux') {
         checkDockerCommand = 'sudo docker info';
+        errorMessage = 'Visit https://docs.docker.com/engine/install/#server and select your distro to install Docker';
     } else if (platform === 'darwin') {
         checkDockerCommand = 'docker info';
+        errorMessage = 'Visit https://docs.docker.com/desktop/mac/install/ to install Docker';
     } else if (platform === 'win32') {
         checkDockerCommand = 'docker info';
+        errorMessage = 'Visit https://docs.docker.com/desktop/windows/install/ to install Docker';
     }
     exec(checkDockerCommand, (err, stdout, stderr) => {
         console.log('error', err);
@@ -80,7 +84,7 @@ function checkDocker() {
         if (err) {
             dialog.showMessageBox({
                 title: `Docker Error`,
-                message: `Docker is not running`,
+                message: errorMessage,
                 buttons: [`OK`],
             });
         } else {
